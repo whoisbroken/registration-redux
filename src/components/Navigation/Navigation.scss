@@ -1,0 +1,28 @@
+.Nav-List {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px 15px;
+}
+
+.Nav-Item {
+  &.MuiButton-root {
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border-radius: 3px;
+  }
+}
+
+@media (max-width: 600px) {
+  .Nav-List {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 430px) {
+  .Nav-List {
+    flex-direction: column;
+  }
+}
+
