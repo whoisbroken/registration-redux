@@ -1,32 +1,8 @@
-const initialState = {
-  users: [{
-      id: 0,
-      userName: "John",
-      userGender: "Male",
-      userCreditCard: "",
-      withLoyalty: false,
-      userCoupon: "",
-      dateAdded: "10 Nov"
-    },
-    {
-      id: 1,
-      userName: "Jane",
-      userGender: "Female",
-      userCreditCard: "",
-      withLoyalty: false,
-      userCoupon: "",
-      dateAdded: "12 Nov"
-    }
-  ]
-};
+import { combineReducers } from 'redux';
+import { usersReducer } from "./usersReducer";
+import { addFormReducer } from "./addFormReducer";
 
-export const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "ADD_USER":
-      return {
-        ...state, users: [...state.users, action.payload]
-      }
-      default:
-        return state;
-  }
-}
+export const rootReducer = combineReducers ({
+  users: usersReducer,
+  formData: addFormReducer,
+});

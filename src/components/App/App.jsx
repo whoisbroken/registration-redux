@@ -16,31 +16,25 @@ import Registration from "../../containers/RegistrationContainer";
 import About from "../About/About";
 
 class App extends Component {
-  constructor(props) {
-    super(props)
 
-    this.state = {
-      users: []
-    }
-  }
 
   componentDidMount() {
-    let users = JSON.parse(localStorage.getItem('users')) || [];
+    // let users = JSON.parse(localStorage.getItem('users')) || [];
 
-    this.setState((prevState) => ({
-      users: [...prevState.users, ...users]
-    }))
+    // this.setState((prevState) => ({
+    //   users: [...prevState.users, ...users]
+    // }))
   }
 
-  addUser = (user) => {
-    this.setState((prevState) => ({
-      users: [...prevState.users, { ...user }],
-    }),
-      () => {
-        localStorage.setItem('users', JSON.stringify(this.state.users));
-      }
-    );
-  };
+  // addUser = (user) => {
+  //   this.setState((prevState) => ({
+  //     users: [...prevState.users, { ...user }],
+  //   }),
+  //     () => {
+  //       localStorage.setItem('users', JSON.stringify(this.state.users));
+  //     }
+  //   );
+  // };
 
   render() {
     return (
@@ -50,10 +44,10 @@ class App extends Component {
           <Navigation />
           <Switch>
             <Route path="/registration">
-              <Registration addUser={this.addUser} />
+              <Registration />
             </Route>
             <Route path="/user-list">
-              <UserListContainer userList={this.state.users}/>
+               <UserListContainer  /> 
             </Route>
             <Route path="/about">
               <About />

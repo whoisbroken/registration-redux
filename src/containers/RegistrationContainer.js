@@ -1,53 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {addUser} from '../actions/actions';
+import {addUser, handleFormChange} from '../actions/actions';
 import RegistrationForm from '../components/Registration/RegistrationForm';
 
-const userData = {
-  id: null,
-  userName: "",
-  userGender: "",
-  userCreditCard: "",
-  withLoyalty: false,
-  userCoupon: "",
-  dateAdded: new Date()
-}
-
 class RegistrationContainer extends Component { 
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...userData,
-      showSuccessAlert: false,
-      showErrorAlert: false
-    };
 
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(e) {
+  handleInputChange(e) {
     const target = e.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
+    this.props.handleFormInputChange({ [name]: value });  
   }
 
   handleSubmit = () => {
 
     if (this.handleValidation()) {
-      this.props.addUser({ ...this.state, dateAdded: new Date().toString().slice(4, 24) });
-      this.setState({
-        userData,
-        showSuccessAlert: true
-      })
+
+       this.props.addUser(this.props.formData);
+      // this.setState({
+      //   userData,
+      //   showSuccessAlert: true
+      // })
+      console.log(this.props)
+      this.props.handleFormInputChange({
+        id: null,
+        userName: "",
+        userGender: "male",
+        userCreditCard: "",
+        withLoyalty: false,
+        userCoupon: "",
+        dateAdded: ""
+      });
     } else {
-      this.setState({
-        showErrorAlert: true
-      })
+      // this.setState({
+      //   showErrorAlert: true
+      // })
     }
 
   }
@@ -77,29 +66,32 @@ class RegistrationContainer extends Component {
     if (reason === 'clickaway') {
       return;
     }
-    this.setState({
-      showSuccessAlert: false,
-      showErrorAlert: false
-    })
+    // this.setState({
+    //   showSuccessAlert: false,
+    //   showErrorAlert: false
+    // })
   }
 
 
   render() {
     return (
       <RegistrationForm
-        formData={this.state}
-        handleChange={this.handleChange}
+        formData={this.props.formData}
+        onInputChange={this.handleInputChange}
         handleSubmit={this.handleSubmit}
         handleClose={this.handleClose}
       />
-    );  
+    );    
   } 
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addUser: (userData) => dispatch(addUser(userData))
-  }
-}
+const mapStateToProps = (state) => ({   
+  formData: state.formData,
+});
 
-export default connect(null, mapDispatchToProps)(RegistrationContainer);
+const mapDispatchToProps = (dispatch) => ({
+  handleFormInputChange: (formData) => dispatch(handleFormChange(formData)),
+  addUser: (userData) => dispatch(addUser(userData)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationContainer);

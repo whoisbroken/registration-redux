@@ -8,9 +8,6 @@
   padding: 20px 20px 16px;
   border-radius: 3px;
   transition: all .3s ease;
-  & .MuiFormControl-root {
-    width: 100%;
-  }
   &:hover {
     box-shadow: 3px 3px 20px rgba(50, 50, 50, 0.25);
   }
@@ -19,13 +16,7 @@
       margin-bottom: 25px;
     }
     &.MuiInput-root {
-      width: 100%;
       margin-bottom: 20px;
-    }
-  }
-  &_Btn {
-    &.MuiButton-root {
-      width: 100%;
     }
   }
 }

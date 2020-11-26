@@ -26,7 +26,7 @@ const TextMaskCustom = (props) => {
   );
 }
 
-const RegistrationForm = ({ formData, handleChange, handleSubmit, handleClose }) => {
+const RegistrationForm = ({ formData, onInputChange, handleSubmit, handleClose }) => {
   return (
     <div>
       <form className="Registration">
@@ -36,7 +36,8 @@ const RegistrationForm = ({ formData, handleChange, handleSubmit, handleClose })
             type="text"
             name="userName"
             value={formData.userName}
-            onChange={handleChange}
+            onChange={onInputChange}
+            fullWidth
             label="Name"
           />
           <InputLabel id="demo-simple-select-label">Gender</InputLabel>
@@ -45,8 +46,9 @@ const RegistrationForm = ({ formData, handleChange, handleSubmit, handleClose })
             className="Registration_Input"
             id="demo-simple-select"
             value={formData.userGender}
-            onChange={handleChange}
+            onChange={onInputChange}
             name="userGender"
+            fullWidth
           >
             <MenuItem value="Male">Male</MenuItem>
             <MenuItem value="Female">Female</MenuItem>
@@ -54,10 +56,11 @@ const RegistrationForm = ({ formData, handleChange, handleSubmit, handleClose })
           <TextField
             className="Registration_Input"
             value={formData.userCreditCard}
-            onChange={handleChange}
+            onChange={onInputChange}
             type="text"
             name="userCreditCard"
             label="Credit Card"
+            fullWidth
             InputProps={{
               inputComponent: TextMaskCustom
             }}
@@ -72,7 +75,7 @@ const RegistrationForm = ({ formData, handleChange, handleSubmit, handleClose })
               type="checkbox"
               name="withLoyalty"
               value={formData.withLoyalty}
-              onChange={handleChange}
+              onChange={onInputChange}
               color="primary"
               inputProps={{ 'aria-label': 'secondary checkbox' }} />}
           />
@@ -82,8 +85,9 @@ const RegistrationForm = ({ formData, handleChange, handleSubmit, handleClose })
               type="text"
               name="userCoupon"
               value={formData.userCoupon}
-              onChange={handleChange}
+              onChange={onInputChange}
               label="Loyalty"
+              fullWidth
               InputProps={{
                 inputComponent: TextMaskCustom
               }}
@@ -94,9 +98,10 @@ const RegistrationForm = ({ formData, handleChange, handleSubmit, handleClose })
             onClick={handleSubmit}
             variant="outlined"
             color="primary"
+            fullWidth
           >Send</Button>
         </form>
-        <Snackbar open={formData.showSuccessAlert} autoHideDuration={4000} onClose={handleClose}>
+        <Snackbar open={formData.showSuccessAlert} autoHideDuration={4000} onClose={handleClose} >
           <Alert
             variant="outlined"
             severity="success"
@@ -105,7 +110,7 @@ const RegistrationForm = ({ formData, handleChange, handleSubmit, handleClose })
             User added!
         </Alert>
         </Snackbar>
-        <Snackbar open={formData.showErrorAlert} autoHideDuration={4000} onClose={handleClose}>
+        <Snackbar open={formData.showErrorAlert} autoHideDuration={4000} onClose={handleClose} >
           <Alert
             variant="outlined"
             severity="error"
