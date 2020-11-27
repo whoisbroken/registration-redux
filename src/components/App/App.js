@@ -37,7 +37,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <CssBaseline />
-          <Container maxWidth="md">
+          <Container maxWidth="sm">
             <Navigation />
             <Routes />
           </Container>

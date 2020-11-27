@@ -1,7 +1,7 @@
 const initialState = {
   id: null,
   userName: "",
-  userGender: "",
+  userGender: "Male",
   userCreditCard: "",
   withLoyalty: false,
   userCoupon: "",

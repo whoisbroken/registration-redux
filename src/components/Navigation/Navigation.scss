@@ -1,7 +1,7 @@
 .Nav-List {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 10px 15px;
 }
 
@@ -11,12 +11,6 @@
     margin: 1em;
     padding: 0.25em 1em;
     border-radius: 3px;
-  }
-}
-
-@media (max-width: 600px) {
-  .Nav-List {
-    justify-content: center;
   }
 }
 

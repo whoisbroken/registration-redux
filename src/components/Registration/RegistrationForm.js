@@ -1,16 +1,11 @@
 import React from 'react';
 import InputMask from "react-input-mask";
-import "./Registration.scss";
+import "./RegistrationForm.scss";
 
 import {
-  Button,
-  Checkbox,
-  TextField,
-  FormControlLabel,
-  InputLabel,
-  Select,
-  MenuItem,
-  Snackbar
+  Button, Checkbox, TextField, FormControlLabel,
+  InputLabel, Select, MenuItem, Snackbar,
+  Box, CircularProgress, Typography
 } from '@material-ui/core';
 import { Alert } from "@material-ui/lab"
 
@@ -26,9 +21,8 @@ const TextMaskCustom = (props) => {
   );
 }
 
-const RegistrationForm = ({ formData, onInputChange, handleSubmit, handleClose }) => {
+const RegistrationForm = ({ formData, onInputChange, handleSubmit, handleClose, isLoading, joke, notificationMessage, showSuccessAlert, showErrorAlert }) => {
   return (
-    <div>
       <form className="Registration">
           <TextField
             required={true}
@@ -100,26 +94,29 @@ const RegistrationForm = ({ formData, onInputChange, handleSubmit, handleClose }
             color="primary"
             fullWidth
           >Send</Button>
-        </form>
-        <Snackbar open={formData.showSuccessAlert} autoHideDuration={4000} onClose={handleClose} >
+        <Snackbar open={showSuccessAlert} autoHideDuration={4000} onClose={handleClose} >
           <Alert
             variant="outlined"
             severity="success"
             onClose={handleClose}
-          >
-            User added!
+            >
+            {notificationMessage}
         </Alert>
         </Snackbar>
-        <Snackbar open={formData.showErrorAlert} autoHideDuration={4000} onClose={handleClose} >
+        <Snackbar open={showErrorAlert} autoHideDuration={4000} onClose={handleClose} >
           <Alert
             variant="outlined"
             severity="error"
             onClose={handleClose}
-          >
-            Something went wrong!
+            >
+            {notificationMessage}
         </Alert>
         </Snackbar>
-    </div>
+        <Box mt={5}>
+          {isLoading ? <CircularProgress /> : <Typography>{joke}</Typography>}
+        </Box>
+      </form>
+
   );
 };
 
