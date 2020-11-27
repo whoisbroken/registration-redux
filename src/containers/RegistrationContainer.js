@@ -6,12 +6,12 @@ import RegistrationForm from '../components/Registration/RegistrationForm';
 
 class RegistrationContainer extends Component { 
 
-  handleInputChange(e) {
+  handleInputChange = (e) => {
     const target = e.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
-    this.props.handleFormInputChange({ [name]: value });  
+    this.props.handleFormInputChange({ [name]: value });
   }
 
   handleSubmit = () => {
@@ -22,8 +22,8 @@ class RegistrationContainer extends Component {
       // this.setState({
       //   userData,
       //   showSuccessAlert: true
-      // })
-      console.log(this.props)
+      // })   
+
       this.props.handleFormInputChange({
         id: null,
         userName: "",
@@ -31,7 +31,7 @@ class RegistrationContainer extends Component {
         userCreditCard: "",
         withLoyalty: false,
         userCoupon: "",
-        dateAdded: ""
+        dateAdded: "",
       });
     } else {
       // this.setState({
@@ -42,7 +42,7 @@ class RegistrationContainer extends Component {
   }
 
   handleValidation() {
-    let fields = this.state;
+    let fields = this.props.formData;
     let errors = {};
     let formIsValid = true;
 

@@ -1,5 +1,5 @@
-const initialState = {
-  users: [{
+const initialState = [
+    {
       id: 0,
       userName: "John",
       userGender: "Male",
@@ -17,13 +17,12 @@ const initialState = {
       userCoupon: "",
       dateAdded: "12 Nov"
     }
-  ]
-};
+  ];
 
 export const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_USER":
-      return [...state.users, action.payload]
+      return [...state, action.payload]
       
       default:
         return state;
