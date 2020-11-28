@@ -6,7 +6,7 @@ const initialState = [
       userCreditCard: "",
       withLoyalty: false,
       userCoupon: "",
-      dateAdded: "10 Nov"
+      dateAdded: "Nov 28 2020 04:20:00"
     },
     {
       id: 1,
@@ -15,7 +15,7 @@ const initialState = [
       userCreditCard: "",
       withLoyalty: false,
       userCoupon: "",
-      dateAdded: "12 Nov"
+      dateAdded: "Sep 11 2001 02:40:00"
     }
   ];
 
