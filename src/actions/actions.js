@@ -50,6 +50,6 @@ export const loadJoke = () => {
         dispatch(loadJokeData(joke.value));
         dispatch(loadJokeSuccess());
       })
-      .catch((e) => console.log(e))
+      .catch(() => dispatch(loadJokeFail()))
   }
 };

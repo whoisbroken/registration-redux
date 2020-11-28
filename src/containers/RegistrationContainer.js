@@ -6,7 +6,7 @@ import {addUser, handleFormChange, showSuccessAlert,
 import RegistrationForm from '../components/Registration/RegistrationForm';
 
 class RegistrationContainer extends Component { 
-
+  
   componentDidMount() {
     this.props.loadJoke()
   }
@@ -24,10 +24,10 @@ class RegistrationContainer extends Component {
     
     if (this.handleValidation()) {
       
-      this.props.addUser(this.props.formData);
-      this.props.showSuccessAlert();
+      this.props.addUser({ ...this.props.formData, dateAdded: new Date().toString().slice(4, 24) });
+      this.props.showSuccessAlert(this.props.notification);
       console.log(this.props)
-      localStorage.setItem('users', JSON.stringify(this.props.formData));
+     // localStorage.setItem('users', JSON.stringify(this.props.formData));
 
       this.props.handleFormInputChange({
         id: null,
@@ -36,10 +36,10 @@ class RegistrationContainer extends Component {
         userCreditCard: "",
         withLoyalty: false,
         userCoupon: "",
-        dateAdded: "",
+        dateAdded: new Date().toString(),
       });
     } else {
-      // this.props.showErrorAlert();
+      this.props.showErrorAlert(this.props.notification);
     }
 
   }
@@ -69,10 +69,7 @@ class RegistrationContainer extends Component {
     if (reason === 'clickaway') {
       return;
     }
-    // this.setState({
-    //   showSuccessAlert: false,
-    //   showErrorAlert: false
-    // })
+    this.props.hideNotification(this.props.notification);
   }
 
 
@@ -86,8 +83,9 @@ class RegistrationContainer extends Component {
         joke={this.props.joke}
         isLoading={this.props.isLoading}
         notificationMessage={this.props.notificationMessage}
-        showSuccessAlert={this.props.showSuccesAlert}
-        showErrorAlert={this.props.showErrorAlert}
+        hideNotification={this.props.hideNotification}
+        successAlert={this.props.successAlert}
+        errorAlert={this.props.errorAlert}
       />
     );    
   } 
@@ -97,15 +95,19 @@ const mapStateToProps = (state) => ({
   formData: state.formData,
   joke: state.joke.value,
   isLoading: state.joke.isLoading,
+  notification: state.notification,
   notificationMessage: state.notification.message,
-  showSuccessAlert: state.notification.isVisible,
-  showErrorAlert: state.notification.isVisible,
+  successAlert: state.notification.successAlert,
+  errorAlert: state.notification.errorAlert,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   loadJoke: () => dispatch(loadJoke()),
   handleFormInputChange: (formData) => dispatch(handleFormChange(formData)),
   addUser: (userData) => dispatch(addUser(userData)),
+  showSuccessAlert: () => dispatch(showSuccessAlert()),
+  showErrorAlert: () => dispatch(showErrorAlert()),
+  hideNotification: () => dispatch(hideNotification()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationContainer);

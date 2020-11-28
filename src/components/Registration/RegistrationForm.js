@@ -21,7 +21,7 @@ const TextMaskCustom = (props) => {
   );
 }
 
-const RegistrationForm = ({ formData, onInputChange, handleSubmit, handleClose, isLoading, joke, notificationMessage, showSuccessAlert, showErrorAlert }) => {
+const RegistrationForm = ({ formData, onInputChange, handleSubmit, handleClose, isLoading, joke, notificationMessage, successAlert, errorAlert }) => {
   return (
       <form className="Registration">
           <TextField
@@ -94,7 +94,7 @@ const RegistrationForm = ({ formData, onInputChange, handleSubmit, handleClose, 
             color="primary"
             fullWidth
           >Send</Button>
-        <Snackbar open={showSuccessAlert} autoHideDuration={4000} onClose={handleClose} >
+        <Snackbar open={successAlert} autoHideDuration={4000} onClose={handleClose} >
           <Alert
             variant="outlined"
             severity="success"
@@ -103,7 +103,7 @@ const RegistrationForm = ({ formData, onInputChange, handleSubmit, handleClose, 
             {notificationMessage}
         </Alert>
         </Snackbar>
-        <Snackbar open={showErrorAlert} autoHideDuration={4000} onClose={handleClose} >
+        <Snackbar open={errorAlert} autoHideDuration={4000} onClose={handleClose} >
           <Alert
             variant="outlined"
             severity="error"
